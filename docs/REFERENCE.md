@@ -43,6 +43,14 @@ Previews: `results/ilastik-<version>/04_previews/` (`frames_overview.png`, `trac
 | all | `scripts/run_all.sh` | steps 0–6, then compress/split for git |
 
 Logs of every ilastik call: `logs/ilastik-<version>/`.
+
+**CI** (`.github/workflows/ci.yml`): on every push and pull request, the shell scripts are parsed, the
+Python scripts compiled, `scripts/check_results.py` checks that the committed results are complete and
+consistent (probability halves rejoin; label images match the CSV tables; previews exist; doc links
+resolve), and `05_compare_versions.py` must reproduce `results/version_comparison.txt` exactly. No
+ilastik is needed for this. Started manually (*Actions → CI → Run workflow*, tick *full_pipeline*), it
+also re-runs `scripts/run_all.sh` from scratch (about an hour; ilastik limited to 2 threads / 5 GB RAM)
+and fails if the regenerated summaries differ from the committed ones.
 The `*_run.ilp` files are the exact (patched, see below) project copies ilastik ran with.
 Images for the README: `docs/chronicle/make_images.py` (terminal renderings of the excerpts in
 `docs/chronicle/screens/`, plus two figures).

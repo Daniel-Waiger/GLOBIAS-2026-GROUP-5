@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      full_pipeline:
+        description: "Also re-run the whole ilastik pipeline (about 1 hour) and compare with the committed results"
+        type: boolean
+        default: false
+
+jobs:
+  checks:
+    name: Scripts and committed results
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Python packages
+        run: pip install h5py numpy pandas scipy scikit-image matplotlib pillow
+      - name: Shell scripts parse
+        run: for f in scripts/*.sh; do bash -n "$f" && echo "ok $f"; done
+      - name: Python scripts compile
+        run: python -m py_compile scripts/*.py docs/chronicle/*.py
+      - name: Committed results are complete and consistent
+        run: python scripts/check_results.py
+      - name: Version comparison reproduces from the committed results
+        run: |
+          python scripts/05_compare_versions.py > "$RUNNER_TEMP/version_comparison.txt"
+          diff -u results/version_comparison.txt "$RUNNER_TEMP/version_comparison.txt"
+
+  full-pipeline:
+    name: Full ilastik re-run
+    if: github.event_name == 'workflow_dispatch' && inputs.full_pipeline
+    needs: checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      LAZYFLOW_THREADS: 2
+      LAZYFLOW_TOTAL_RAM_MB: 5000
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run scripts/run_all.sh
+        run: scripts/run_all.sh
+      - name: Compare with the committed results
+        run: |
+          git status --short
+          git diff --exit-code -- results/version_comparison.txt 'results/*/04_previews/summary.txt'
+      - name: Upload logs and summaries
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-pipeline-logs
+          path: |
+            logs/
+            results/version_comparison.txt
+            results/*/04_previews/summary.txt

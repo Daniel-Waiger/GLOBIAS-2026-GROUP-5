@@ -12,5 +12,6 @@ LOGS="logs/ilastik-$VERSION"
 DATA="data/mitocheck_2d+t"
 RAW="$DATA/mitocheck_94570_2D+t_01-53.h5"
 PMAPS="$RUN/02_pixel_classification/mitocheck_94570_2D+t_01-53-volume-data_Probabilities.h5"
-export QT_QPA_PLATFORM=offscreen LAZYFLOW_THREADS=4 LAZYFLOW_TOTAL_RAM_MB=12000
+# Threads and RAM for ilastik; override from the environment on smaller machines (e.g. CI).
+export QT_QPA_PLATFORM=offscreen LAZYFLOW_THREADS="${LAZYFLOW_THREADS:-4}" LAZYFLOW_TOTAL_RAM_MB="${LAZYFLOW_TOTAL_RAM_MB:-12000}"
 mkdir -p "$RUN" "$LOGS"
