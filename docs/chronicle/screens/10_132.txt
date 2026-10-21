@@ -1,0 +1,16 @@
+# 06:59 UTC: ilastik 1.3.2post1 (2018 binary) on a 2026 Linux
+# source: .work/failed_1.3.2post1_pixel_classification.log (excerpt, verbatim)
+$ run_ilastik.sh --headless --project=.../pixelClassification_run.ilp --export_source=Probabilities ...
+WARNING 2026-10-21 06:59:54,825 filterOperators ... Failed to import fast filters:
+    .work/il132/ilastik-1.3.2post1-Linux/lib/python3.6/site-packages/fastfilters/../../../
+    libfastfilters.so.0.2.6-13-gce61889: undefined symbol: __atan2_finite
+[…]
+INFO ilastik.shell.projectManager: Opening Project: .../pixelClassification_run.ilp
+[…]
+  File ".../lazyflow/lazyflow/operators/filterOperators.py", line 101, in setupOutputs
+    self.max_sigma = max(0.7, *filter_scales.values())
+TypeError: '>' not supported between instances of 'tuple' and 'float'
+ERROR 2026-10-21 06:59:56,895 ... Project could not be loaded due to the exception shown above.
+
+$ ldd --version | head -1
+ldd (Ubuntu GLIBC 2.39-0ubuntu8.9) 2.39

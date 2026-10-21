@@ -3,3 +3,4 @@
 data/mitocheck.zip
 # full-size probability maps: committed as .part1/.part2 (GitHub 100 MB limit); rebuild with scripts/split_join_h5.py join
 results/*/02_pixel_classification/*-volume-data_Probabilities.h5
+__pycache__/

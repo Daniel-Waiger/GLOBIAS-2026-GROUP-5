@@ -1,0 +1,19 @@
+# 06:54–06:55 UTC, walls 3 and 4: the tracking project
+# source: re-runs with ilastik 1.5.0a3 (.work/repro/c.log, .work/repro/d.log) and 1.3.3post3 (.work/repro/e.log)
+$ ilastik --headless --project=.work/repro/c/conservationTracking.ilp --raw_data=... --prediction_maps=<new step-2 map> ...
+[…]
+FileNotFoundError: [Errno 2] No such file or directory: 'mitocheck_94570_2D+t_01-53_export.h5'
+[…]
+ERROR ... Project could not be loaded due to the exception shown above.
+
+  -> the project only opens with its own 2014 probability map next to it (it was trained on it)
+
+$ ilastik --headless --project=.work/repro/d/conservationTracking.ilp ...     # 2014 map linked
+INFO ilastik.workflows.tracking.conservation.conservationTrackingWorkflow: Beginning Batch Processing
+[…]
+KeyError: 'size_range'
+
+$ run_ilastik.sh --headless --project=.work/repro/e/conservationTracking.ilp ...   # same, ilastik 1.3.3post3
+INFO ilastik.workflows.tracking.conservation.conservationTrackingWorkflow: Beginning Batch Processing
+[…]
+KeyError: 'size_range'

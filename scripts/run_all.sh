@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Full pipeline: download, install, then for each ilastik version pixel classification -> tracking ->
-# previews; finally compress/split the large HDF5 files for git and compare the two versions.
+# previews; then the version comparison and the side-by-side GIF; finally compress/split the large
+# HDF5 files for git.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 [ -f "data/mitocheck_2d+t/mitocheck_94570_2D+t_01-53.h5" ] || scripts/00_download_data.sh
@@ -12,6 +13,7 @@ for V in 1.3.3post3 1.5.0a3; do
   "$PY" scripts/04_make_previews.py "results/ilastik-$V"
 done
 "$PY" scripts/05_compare_versions.py > results/version_comparison.txt
+"$PY" scripts/06_side_by_side_gif.py
 for V in 1.3.3post3 1.5.0a3; do
   "$PY" scripts/compress_h5.py results/ilastik-$V/0[23]_*/*-volume-data_*.h5
   "$PY" scripts/split_join_h5.py split results/ilastik-$V/02_pixel_classification/*_Probabilities.h5

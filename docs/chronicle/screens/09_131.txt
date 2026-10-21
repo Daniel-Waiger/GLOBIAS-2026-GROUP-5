@@ -1,0 +1,11 @@
+# 06:57 UTC: "maybe run it on ilastik 1.3.1 post?"
+# source: curl probes of files.ilastik.org (re-run, verbatim; 404 = not there, 206 = file exists)
+$ for v in 1.3.1post1 1.3.1 1.3.1b1 1.3.2post1 1.3.3post3; do
+    echo "files.ilastik.org/ilastik-$v-Linux.tar.bz2 -> HTTP $(curl -s -o /dev/null -w '%{http_code}' -r 0-10 ...)"; done
+files.ilastik.org/ilastik-1.3.1post1-Linux.tar.bz2 -> HTTP 404
+files.ilastik.org/ilastik-1.3.1-Linux.tar.bz2 -> HTTP 404
+files.ilastik.org/ilastik-1.3.1b1-Linux.tar.bz2 -> HTTP 206
+files.ilastik.org/ilastik-1.3.2post1-Linux.tar.bz2 -> HTTP 206
+files.ilastik.org/ilastik-1.3.3post3-Linux.tar.bz2 -> HTTP 206
+
+ilastik's download archive page lists 1.3.0, 1.3.2post1 and 1.3.3post3 for the 1.3 series.

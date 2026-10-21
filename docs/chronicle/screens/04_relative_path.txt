@@ -1,0 +1,11 @@
+# 06:49 UTC, wall 1: the project looks for its movie next to itself
+# source: re-run with ilastik 1.5.0a3, project copied to a folder without the movie (.work/repro/a.log)
+$ ilastik --headless --project=.work/repro/a/pixelClassification.ilp --export_source=Probabilities ...
+INFO ilastik.shell.projectManager: Opening Project: .work/repro/a/pixelClassification.ilp
+[…]
+FileNotFoundError: [Errno 2] No such file or directory: 'mitocheck_94570_2D+t_01-53.h5'
+[…]
+KeyError: "Unable to synchronously open object (object 'shape' doesn't exist)"
+ERROR ... Project could not be loaded due to the exception shown above.
+
+fix: link the movie next to the project copy (the .ilp stores the path relative to itself)

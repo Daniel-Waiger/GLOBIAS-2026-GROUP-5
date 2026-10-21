@@ -1,0 +1,15 @@
+# 06:48 UTC: data.ilastik.org allowed, the example arrives (zip dated 2013–2014)
+# source: unzip -l data/mitocheck.zip (re-run, verbatim)
+$ unzip -l data/mitocheck.zip
+Archive:  data/mitocheck.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+        0  2014-07-11 09:52   mitocheck_2d+t/
+ 11473116  2014-07-11 09:52   mitocheck_2d+t/conservationTracking.ilp
+ 16637489  2014-07-11 09:40   mitocheck_2d+t/manualTracking.ilp
+ 74741275  2013-06-17 10:06   mitocheck_2d+t/mitocheck_94570_2D+t_01-53.h5
+ 66499818  2013-06-17 10:24   mitocheck_2d+t/mitocheck_94570_2D+t_01-53_export.h5
+   711932  2014-02-11 15:17   mitocheck_2d+t/pixelClassification.ilp
+      123  2013-06-17 09:29   mitocheck_2d+t/readme.txt
+---------                     -------
+170063753                     7 files

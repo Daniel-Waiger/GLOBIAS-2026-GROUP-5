@@ -1,0 +1,23 @@
+# 04:58–05:08 UTC: the conda solver refuses ilastik 1.4.1; the 1.5.0a3 alpha resolves
+# source: .work/install3.log, .work/dB.log (micromamba output; […] = lines left out)
+$ micromamba create -n ilastik -c ilastik-forge -c conda-forge "ilastik=1.4.1.post1" "pytorch=*=cpu*"
+error    libmamba Could not solve for environment specs
+    The following package could not be installed
+    └─ ilastik =1.4.1.post1 * is not installable because it requires
+       ├─ ilastik-core ==1.4.1.post1 py_0, which requires
+       │  ├─ mkl <2024.1.0 *, which can be installed;
+       │  ├─ sphericaltexture ==0.0.4 *, which can be installed;
+       │  ├─ tiktorch ==25.4.0 *, which can be installed;
+       │  └─ vigra ==1.11.1 *_1038 with the potential options
+[…]
+          └─ torchvision 0.8.2 would require
+             └─ python_abi =3.6 *_cp36m, which can be installed.
+critical libmamba Could not solve for environment specs
+
+$ micromamba create --dry-run -n b -c ilastik-forge -c conda-forge "ilastik=1.5.0a3"
+[…]
+  + ilastik              1.5.0a3  0                   ilastik-forge   31MB
+[…]
+  + ilastik-core         1.5.0a3  py_0                ilastik-forge   34MB
+[…]
+  + python               3.13.16  hf47f18c_102_cp313  conda-forge     24MB

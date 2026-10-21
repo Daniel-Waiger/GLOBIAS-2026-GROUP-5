@@ -1,0 +1,18 @@
+# 07:01–07:04 UTC: ilastik 1.3.3post3 runs the 2014 pixel classification project unmodified (shown: clean re-run, 07:33)
+# source: logs/ilastik-1.3.3post3/*.log (excerpts, logger names shortened) + results/version_comparison.txt
+$ scripts/02_pixel_classification.sh 1.3.3post3 && scripts/03_tracking.sh 1.3.3post3
+INFO ...projectManager: Opening Project: results/ilastik-1.3.3post3/02_pixel_classification/pixelClassification_run.ilp
+INFO ...pixelClassificationWorkflow: Beginning Batch Processing
+INFO ...pixelClassificationWorkflow: Completed Batch Processing
+INFO ...projectManager: Opening Project: results/ilastik-1.3.3post3/03_tracking/conservationTracking_run.ilp
+INFO ...conservationTrackingWorkflow: Beginning Batch Processing
+INFO ...conservationTrackingWorkflow: Completed Batch Processing
+
+$ cat results/version_comparison.txt
+[…]
+== Step 3: tracking
+  1.3.3post3: objects 7485, tracks 357, lineages 117, untracked objects (trackId -1) 328
+  1.5.0a3: objects 7485, tracks 357, lineages 117, untracked objects (trackId -1) 328
+  pixels whose Tracking-Result value differs: 161 of 3605410 labelled pixels (0.0045%); per frame min 0, median 1, max 62
+  label values whose main overlap in the other run has the same number: 118 of 118
+  label values matching strictly one-to-one (no pixel overlaps any other label): 114 of 118 (value 1 = untracked objects)

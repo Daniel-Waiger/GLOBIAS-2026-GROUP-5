@@ -1,0 +1,17 @@
+# 04:51 UTC: an empty repository, and most of the internet closed
+# source: session transcript (command output, verbatim; two commands)
+$ git status && git log --oneline && ls
+On branch ccr-9adc903f-jtm2xr
+nothing to commit, working tree clean
+032e291 Initial commit
+README.md
+
+$ for u in ...; do echo "$u -> $(curl -s -o /dev/null -w '%{http_code}' -r 0-100 "$u")"; done
+https://github.com/ilastik/ilastik -> 403
+https://api.github.com/repos/ilastik/ilastik/releases?per_page=3 -> 403
+https://conda.anaconda.org/conda-forge/noarch/repodata.json -> 206
+https://data.ilastik.org/ -> 000
+https://www.ilastik.org/ -> 000
+https://zenodo.org -> 000
+
+[agent-proxy] data.ilastik.org:443 — connect_rejected

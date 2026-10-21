@@ -1,0 +1,11 @@
+# 06:51 UTC, wall 2: ilastik 1.5 cannot place the 2014 training labels
+# source: re-run with ilastik 1.5.0a3, movie linked, project unmodified (.work/repro/b.log)
+$ ilastik --headless --project=.work/repro/b/pixelClassification.ilp --export_source=Probabilities ...
+INFO ilastik.shell.projectManager: Opening Project: .work/repro/b/pixelClassification.ilp
+[…]
+  File ".../lazyflow/operators/opCompressedUserLabelArray.py", line 421, in _setInSlotInput
+    block_rois = getIntersectingRois(self.Output.meta.shape, self._blockshape, (roi.start, roi.stop))
+  File ".../lazyflow/roi.py", line 651, in getIntersectingRois
+[…]
+AssertionError: Rois do not intersect: (array([   0, 1012,  504,    0]), array([   1, 1024,  756,    1]))
+                                   and ([0, 1024, 704, 0], [1, 1024, 768, 1])

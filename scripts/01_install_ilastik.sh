@@ -2,7 +2,8 @@
 # Step 1: install the two ilastik versions used here into .work/ (not committed).
 #  - ilastik 1.3.3post3: official Linux binary (files.ilastik.org). Main run; it opens the
 #    2014 MitoCheck projects with the fewest changes. (1.3.1 is not in ilastik's download
-#    archive; 1.3.2post1 crashes on this pixel-classification project.)
+#    archive. 1.3.2post1 fails here: its bundled fast-filters library does not load on current
+#    glibc, and the fallback code path has a bug for 2D data; see docs/REFERENCE.md.)
 #  - ilastik 1.5.0a3: from the ilastik-forge conda channel, for comparison. (1.4.1 no longer
 #    resolves against the current conda channels.)
 set -euo pipefail
