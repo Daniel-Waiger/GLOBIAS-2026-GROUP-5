@@ -285,8 +285,9 @@ it, for judging such output as an analyst would:
 
 Discussion for Group 5 and the workshop happens in the
 [issue tracker](https://github.com/Daniel-Waiger/GLOBIAS-2026-GROUP-5/issues). Start with the issue labelled
-`start-here`. **New issue** offers forms for a discussion topic, an LLM-benchmark entry (one per LLM
-answer), meeting notes, and problems with the pipeline.
+`start-here`. **New issue** offers forms for a discussion topic, an Assignment I LLM-benchmark entry
+(one per LLM answer), an Assignment II consensus experiment (one per dataset and combination rule),
+meeting notes, and problems with the pipeline.
 
 ## Reproduce
 

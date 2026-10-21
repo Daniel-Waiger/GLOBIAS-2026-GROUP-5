@@ -16,6 +16,17 @@ body:
       label: Background and links
       description: Papers, datasets, images, or files in this repository (give the path).
   - type: dropdown
+    id: part
+    attributes:
+      label: Part of the session work
+      options:
+        - "Assignment I: LLM benchmark"
+        - "Assignment II: consensus and ground truth"
+        - Presentation
+        - Other
+    validations:
+      required: true
+  - type: dropdown
     id: when
     attributes:
       label: Where should we discuss it?

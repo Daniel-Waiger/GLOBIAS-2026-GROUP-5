@@ -1,7 +1,7 @@
-name: LLM benchmark entry
+name: "Assignment I: LLM benchmark entry"
 description: Record one LLM's answer to our bioimage analysis prompt and review it as an analyst.
 title: "[LLM benchmark] <model> – <question>"
-labels: ["llm-benchmark"]
+labels: ["llm-benchmark", "assignment-1"]
 body:
   - type: markdown
     attributes:

@@ -1,0 +1,64 @@
+name: "Assignment II: consensus experiment"
+description: "Group 5 brainstorming: combine several independent annotations into a reference and record the rule used."
+title: "[Consensus] <dataset> – <rule>"
+labels: ["consensus", "assignment-2"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Key question (Group 5): Is consensus sufficient to define ground truth?**
+        One issue per dataset + combination rule, so the rules can be compared side by side.
+  - type: input
+    id: dataset
+    attributes:
+      label: Dataset
+      description: Link and one-line description of the images.
+    validations:
+      required: true
+  - type: textarea
+    id: annotations
+    attributes:
+      label: The independent annotations
+      description: How many, who or what produced them (expertise, tool, model), how they were made, where they are stored.
+    validations:
+      required: true
+  - type: dropdown
+    id: rule
+    attributes:
+      label: Combination rule
+      options:
+        - Majority vote
+        - Unanimity (only where all agree)
+        - Expert adjudication
+        - Weighted by expertise
+        - Exclude uncertain regions
+        - STAPLE or another probabilistic estimate
+        - Other (describe below)
+    validations:
+      required: true
+  - type: textarea
+    id: rule_details
+    attributes:
+      label: Rule details
+      description: Exact definition (e.g. "a pixel is foreground if at least 3 of 5 annotators marked it"), thresholds, weights, tie-breaking.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Resulting reference annotation
+      description: Link or file path, plus a screenshot or figure if possible.
+  - type: textarea
+    id: agreement
+    attributes:
+      label: Agreement measured
+      description: For example each annotation vs. the consensus (IoU / Dice, object counts), or agreement between annotators. Say how it was computed.
+  - type: textarea
+    id: observations
+    attributes:
+      label: Where the annotations disagree, and what the rule did there
+  - type: textarea
+    id: answer
+    attributes:
+      label: What this says about the key question
+      description: Is this consensus sufficient as ground truth here? What would be missing?

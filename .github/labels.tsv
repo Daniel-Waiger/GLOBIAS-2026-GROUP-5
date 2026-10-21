@@ -1,7 +1,11 @@
 # name<TAB>colour<TAB>description — created/updated by .github/workflows/labels.yml
 start-here	0E8A16	How to use this tracker
 discussion	1D76DB	Topic for a group meeting or the workshop
+assignment-1	C5DEF5	Assignment I: benchmark LLMs on a bioimage analysis question
+assignment-2	BFD4F2	Assignment II (Group 5): can consensus become ground truth?
+presentation	F9D0C4	The 15-minute workshop presentation
 llm-benchmark	5319E7	One LLM answer and its review by the group
+consensus	006B75	One consensus experiment: annotations, combination rule, result
 meeting	FBCA04	Meeting notes and action items
 decision-needed	B60205	The group needs to decide something
 pipeline	D93F0B	Problem with the ilastik pipeline, scripts or results
