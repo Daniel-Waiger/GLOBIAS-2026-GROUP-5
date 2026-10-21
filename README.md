@@ -1,4 +1,4 @@
-# GLOBIAS 2026 · Group 5 · Assignment I
+# GLOBIAS 2026 · Group 5 · Assignment II
 
 **Twelve years later: re-running ilastik's MitoCheck tracking example**
 
