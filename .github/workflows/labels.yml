@@ -1,0 +1,26 @@
+name: Labels
+
+# Creates or updates the issue labels listed in .github/labels.tsv (name, colour, description; tab-separated).
+on:
+  push:
+    branches: [main]
+    paths: [.github/labels.tsv, .github/workflows/labels.yml]
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create or update labels
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          while IFS=$'\t' read -r name colour description; do
+            case "$name" in ""|"#"*) continue ;; esac
+            gh label create "$name" --color "$colour" --description "$description" --force --repo "$GITHUB_REPOSITORY"
+            echo "label: $name"
+          done < .github/labels.tsv

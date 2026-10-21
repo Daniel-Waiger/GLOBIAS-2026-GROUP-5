@@ -1,0 +1,90 @@
+name: "Assignment I: LLM benchmark entry"
+description: Record one LLM's answer to our bioimage analysis prompt and review it as an analyst.
+title: "[LLM benchmark] <model> – <question>"
+labels: ["llm-benchmark", "assignment-1"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        One issue per LLM answer. Give every LLM the **same prompt, word for word**, so the answers can be compared.
+        Paste answers verbatim; put your own judgement only in the review fields.
+  - type: textarea
+    id: question
+    attributes:
+      label: Bioimage analysis question
+      description: The question being benchmarked (link the discussion issue where we chose it).
+    validations:
+      required: true
+  - type: input
+    id: dataset
+    attributes:
+      label: Dataset
+      description: Link and one-line description of the images.
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: LLM, version and date
+      description: As shown by the tool, e.g. model name and version, plus the date you asked.
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: How the LLM was used
+      options:
+        - Chat, text only
+        - Chat with images or files uploaded
+        - Agent that ran code itself
+        - Other (explain in the notes)
+    validations:
+      required: true
+  - type: textarea
+    id: prompt
+    attributes:
+      label: Prompt (verbatim)
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: answer
+    attributes:
+      label: LLM answer (verbatim, or a link to the full transcript)
+    validations:
+      required: true
+  - type: checkboxes
+    id: review
+    attributes:
+      label: Analyst review
+      description: Tick what is true for this answer.
+      options:
+        - label: Proposes a workflow that goes from the images to measured numbers or plots that answer the question
+        - label: Names tools, plugins or functions that exist and fit the task
+        - label: Justifies parameter values, or says how to choose them
+        - label: Includes validation (ground truth, controls, visual checks, sanity checks on the numbers)
+        - label: States assumptions and limitations
+        - label: Contains factual errors, or tools/functions/parameters that do not exist
+  - type: dropdown
+    id: rating
+    attributes:
+      label: Overall rating
+      options:
+        - 1 – unusable
+        - 2 – major problems
+        - 3 – usable after substantial changes
+        - 4 – usable after minor changes
+        - 5 – would follow as is
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Review notes
+      description: What would a professional bioimage analyst change? Quote the parts of the answer you mean.
+    validations:
+      required: true
+  - type: textarea
+    id: tested
+    attributes:
+      label: Did anyone run the proposed analysis? What came out?

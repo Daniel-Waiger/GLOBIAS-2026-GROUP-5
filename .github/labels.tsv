@@ -1,0 +1,8 @@
+# name<TAB>colour<TAB>description — created/updated by .github/workflows/labels.yml
+start-here	0E8A16	How to use this tracker
+discussion	1D76DB	Topic for a group meeting or the workshop
+assignment-1	C5DEF5	Assignment I: benchmarking LLMs on a bioimage analysis question
+llm-benchmark	5319E7	One LLM answer and its review by the group
+meeting	FBCA04	Meeting notes and action items
+decision-needed	B60205	The group needs to decide something
+pipeline	D93F0B	Problem with the ilastik pipeline, scripts or results

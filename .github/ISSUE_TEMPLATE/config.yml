@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Project overview (README)
+    url: https://github.com/Daniel-Waiger/test#readme
+    about: What is in this repository and how the MitoCheck/ilastik run was done.
+  - name: Technical reference
+    url: https://github.com/Daniel-Waiger/test/blob/main/docs/REFERENCE.md
+    about: File formats, the fixes to the 2014 projects, how to reproduce the results.

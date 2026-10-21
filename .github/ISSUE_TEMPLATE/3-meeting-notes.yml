@@ -1,0 +1,35 @@
+name: Meeting notes
+description: Agenda, notes, decisions and action items of a group meeting or workshop session.
+title: "[Meeting] YYYY-MM-DD "
+labels: ["meeting"]
+body:
+  - type: input
+    id: date
+    attributes:
+      label: Date
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true
+  - type: textarea
+    id: attendees
+    attributes:
+      label: Attendees
+  - type: textarea
+    id: agenda
+    attributes:
+      label: Agenda
+      description: Link the issues discussed (#number).
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+  - type: textarea
+    id: decisions
+    attributes:
+      label: Decisions
+  - type: textarea
+    id: actions
+    attributes:
+      label: Action items
+      value: |
+        - [ ] @who — what — by when

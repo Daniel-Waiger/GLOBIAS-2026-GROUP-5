@@ -1,0 +1,53 @@
+name: Problem with the ilastik pipeline or results
+description: Something in the scripts, results, CI or documentation does not work or looks wrong.
+title: "[Pipeline] "
+labels: ["pipeline"]
+body:
+  - type: dropdown
+    id: step
+    attributes:
+      label: Step
+      options:
+        - 0 download data
+        - 1 install ilastik
+        - 2 pixel classification
+        - 3 tracking
+        - 4 previews
+        - 5 version comparison
+        - 6 side-by-side GIF
+        - CI
+        - Documentation (README / REFERENCE)
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: version
+    attributes:
+      label: ilastik version
+      options:
+        - 1.3.3post3
+        - 1.5.0a3
+        - both
+        - not applicable
+  - type: textarea
+    id: command
+    attributes:
+      label: Command you ran
+      render: shell
+  - type: textarea
+    id: happened
+    attributes:
+      label: What happened
+      description: Paste the relevant part of the log (logs/ilastik-<version>/…) or the error.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, and how ilastik was installed.

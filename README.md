@@ -281,6 +281,13 @@ it, for judging such output as an analyst would:
 - **1.5.0a3 is an alpha**, and its pixel probabilities differ from 1.3.3's by up to 0.12 even though both
   use the same project. The cause was not investigated.
 
+## Group discussion
+
+Discussion for Group 5 and the workshop happens in the
+[issue tracker](https://github.com/Daniel-Waiger/test/issues). Start with the issue labelled
+`start-here`. **New issue** offers forms for a discussion topic, an Assignment I LLM-benchmark entry
+(one per LLM answer), meeting notes, and problems with the pipeline.
+
 ## Reproduce
 
 ```bash
