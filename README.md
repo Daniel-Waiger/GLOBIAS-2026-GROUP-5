@@ -1,4 +1,6 @@
-# Twelve years later: re-running ilastik's MitoCheck tracking example
+# GLOBIAS 2026 · Group 5 · Assignment I
+
+**Twelve years later: re-running ilastik's MitoCheck tracking example**
 
 On 21 October 2026, in one cloud session, Claude (an AI assistant) and I re-ran ilastik's MitoCheck
 tracking example: a 53-frame movie of cell nuclei (MitoCheck movie 94570; files dated 2013), together
