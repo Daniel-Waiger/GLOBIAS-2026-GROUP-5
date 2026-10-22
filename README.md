@@ -289,6 +289,26 @@ Discussion for Group 5 and the workshop happens in the
 (one per LLM answer), an Assignment II consensus experiment (one per dataset and combination rule),
 meeting notes, and problems with the pipeline.
 
+## Companion: the Shape Analysis Field Guide
+
+The second strand of this group's work is shape analysis, the step after segmentation and tracking:
+turning each outline into numbers that ignore where a cell sits, how big it is and which way it points,
+so that populations can be averaged, compared and classified.
+
+- **[Daniel-Waiger/shape-analysis-field-guide](https://github.com/Daniel-Waiger/shape-analysis-field-guide)**
+  (private for now): a plain-language, illustrated guide in ten chapters, with a tested Python
+  re-implementation of every method (`shapekit`), 27 generated figures and animations, and a reader site
+  with six interactive demos. It adapts the EMBL-EBI tutorial
+  [Shape Analysis 101](https://github.com/uhlmanngroup/shapeanalysis101) (Hugger & Uhlmann, 2021).
+- **[docs/shapeanalysis101_explained.md](docs/shapeanalysis101_explained.md)**, in this repository: the
+  file-by-file reading of that tutorial that the guide was built from, including the bugs found in it
+  (a centering step that averages over the wrong axis, a network that never leaves evaluation mode, a
+  comment that outlived the code it described) and, in the guide's chapter 09, why each one happened.
+
+Both were produced the same way as the ilastik run above, in Claude Code cloud sessions with the work
+split across reading, writing, engineering and design agents and every claim re-checked against the
+source, so they belong to the same LLM-benchmark discussion as Assignment I.
+
 ## Reproduce
 
 ```bash
