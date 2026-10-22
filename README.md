@@ -298,8 +298,10 @@ so that populations can be averaged, compared and classified.
 - **[Daniel-Waiger/shape-analysis-field-guide](https://github.com/Daniel-Waiger/shape-analysis-field-guide)**
   — a plain-language, illustrated guide in ten chapters, with a tested Python
   re-implementation of every method (`shapekit`), 27 generated figures and animations, and a reader site
-  with six interactive demos. It adapts the EMBL-EBI tutorial
-  [Shape Analysis 101](https://github.com/uhlmanngroup/shapeanalysis101) (Hugger & Uhlmann, 2021).
+  with six interactive demos, published at
+  **<https://daniel-waiger.github.io/shape-analysis-field-guide/>**. It adapts the EMBL-EBI tutorial
+  [Shape Analysis 101](https://github.com/uhlmanngroup/shapeanalysis101) by Johannes Hugger and
+  Virginie Uhlmann (2021).
 - **[docs/shapeanalysis101_explained.md](docs/shapeanalysis101_explained.md)**, in this repository: the
   file-by-file reading of that tutorial that the guide was built from, including the bugs found in it
   (a centering step that averages over the wrong axis, a network that never leaves evaluation mode, a
