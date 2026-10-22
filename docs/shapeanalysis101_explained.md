@@ -1,6 +1,9 @@
 # Shape Analysis 101: every file explained in plain language
 
 Repository: <https://github.com/uhlmanngroup/shapeanalysis101> (BSD 3-Clause, © 2021 Uhlmann Group @ EMBL-EBI).
+Authors: Johannes Hugger and Virginie Uhlmann (Uhlmann group, EMBL-EBI); the spline toolbox is by Virginie Uhlmann
+and the spline shape space by Virginie Uhlmann and Anna Song (after Song, Uhlmann, Fageot & Unser 2020). Short passages
+from the notebooks are reproduced only as marked quotations; everything else below is a description, not a copy.
 Snapshot read: commit `bfccc0c` (21 Nov 2023), the only commit in the shallow clone.
 
 **How this was produced.** The repo was cloned and split across four reader agents: notebook 1 plus the data;
