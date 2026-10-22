@@ -296,7 +296,7 @@ turning each outline into numbers that ignore where a cell sits, how big it is a
 so that populations can be averaged, compared and classified.
 
 - **[Daniel-Waiger/shape-analysis-field-guide](https://github.com/Daniel-Waiger/shape-analysis-field-guide)**
-  (private for now): a plain-language, illustrated guide in ten chapters, with a tested Python
+  — a plain-language, illustrated guide in ten chapters, with a tested Python
   re-implementation of every method (`shapekit`), 27 generated figures and animations, and a reader site
   with six interactive demos. It adapts the EMBL-EBI tutorial
   [Shape Analysis 101](https://github.com/uhlmanngroup/shapeanalysis101) (Hugger & Uhlmann, 2021).
