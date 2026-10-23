@@ -296,12 +296,20 @@ turning each outline into numbers that ignore where a cell sits, how big it is a
 so that populations can be averaged, compared and classified.
 
 - **[Daniel-Waiger/shape-analysis-field-guide](https://github.com/Daniel-Waiger/shape-analysis-field-guide)**
-  — a plain-language, illustrated guide in ten chapters, with a tested Python
+  — a plain-language, illustrated guide in eleven chapters, with a tested Python
   re-implementation of every method (`shapekit`), 27 generated figures and animations, and a reader site
   with six interactive demos, published at
   **<https://daniel-waiger.github.io/shape-analysis-field-guide/>**. It adapts the EMBL-EBI tutorial
   [Shape Analysis 101](https://github.com/uhlmanngroup/shapeanalysis101) by Johannes Hugger and
   Virginie Uhlmann (2021).
+- **[Phenotype Lab](https://daniel-waiger.github.io/shape-analysis-field-guide/lab/)**, the guide's
+  chapter 10: whether shape alone can classify a phenotype, on six labeled datasets (live vs dead worms,
+  wild-type vs lamin-deficient fibroblasts, schizophrenia vs control brain landmarks, female vs male
+  gorilla skulls, 15 leaf species, sickle-cell erythrocytes), with landmark, spline and PointNet methods
+  side by side against a size-only baseline. Every number comes from a script in the guide's repository;
+  you can drag a shape and watch the classifier respond, in the browser or on a phone. The
+  [chapter text](https://daniel-waiger.github.io/shape-analysis-field-guide/#10) reports the results
+  as they came out, including one below chance.
 - **[docs/shapeanalysis101_explained.md](docs/shapeanalysis101_explained.md)**, in this repository: the
   file-by-file reading of that tutorial that the guide was built from, including the bugs found in it
   (a centering step that averages over the wrong axis, a network that never leaves evaluation mode, a
