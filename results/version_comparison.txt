@@ -8,7 +8,7 @@
 == Step 3: tracking
   1.3.3post3: objects 7485, tracks 357, lineages 117, untracked objects (trackId -1) 328
   1.5.0a3: objects 7485, tracks 357, lineages 117, untracked objects (trackId -1) 328
-  pixels whose Tracking-Result value differs: 161 of 3605410 labelled pixels (0.0045%); per frame min 0, median 1, max 62
-  label values whose main overlap in the other run has the same number: 118 of 118
+  pixels whose Tracking-Result value differs: 57822 of 3605410 labelled pixels (1.6038%); per frame min 322, median 1049, max 1606
+  label values whose main overlap in the other run has the same number: 116 of 118
   label values matching strictly one-to-one (no pixel overlaps any other label): 114 of 118 (value 1 = untracked objects)
   pixels labelled in only one version (all frames): 24
