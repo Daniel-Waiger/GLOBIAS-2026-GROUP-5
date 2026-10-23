@@ -1,5 +1,7 @@
 # Reproducibility report: ilastik MitoCheck workflow
 
+**Model: claude-sonnet-5-5 · Effort: medium** (from `get_session`: `session_context.model`, `last_served_model` and `effort_level`)
+
 - **Model / effort:** claude-sonnet-5-5, effort `medium` (read from `get_session`; the session's `configured_model` field says claude-opus-5-5, but `session_context.model` and `last_served_model` both say claude-sonnet-5-5).
 - **Branch:** `repro/sonnet-5.5-medium` (not pushed to main).
 - **Wall-clock:** 08:42:49Z to about 08:57Z on 2026-10-23, roughly 14 minutes in total, including reading the docs and writing this report. The step timings are in the table below.
