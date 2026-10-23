@@ -48,8 +48,8 @@ rows differing beyond 1e-6 relative: 229
 ### cmp4.py
 Object-Identities differing px: 45235 ; of these inside Merger-Result>0: 45235
 Tracking-Result diffs beyond 117/118 swap inside merger pixels: 97 of 97
-results objects with mergerLabelId!=0: 166
-<commit objects with mergerLabelId!=0: 166
+regenerated objects with mergerLabelId!=0: 166
+committed objects with mergerLabelId!=0: 166
 ### cmp5.py
 1.5.0a3 identical after reordering columns by name: True ; rows differing: 0
 1.3.3post3 identical after reordering columns by name: False ; rows differing: 190
