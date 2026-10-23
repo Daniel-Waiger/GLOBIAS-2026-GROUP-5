@@ -250,6 +250,11 @@ cells. The two versions draw the dividing line a little differently. 137 of the 
 are cases like this; the other 24 are edge pixels that one version calls cell and the other
 background.
 
+> **Update, 23 October.** Two later reproduction runs found that ilastik 1.3.3post3's tracking is not
+> exactly repeatable: on rerun, touching nuclei were split differently, and in one run two lineages
+> swapped numbers. Much of the 161-pixel difference above is probably run-to-run variation, not a
+> difference between versions. See [Five ilastik sessions compared](docs/session_comparison.md).
+
 ## Two things Claude got wrong on the way
 
 - Claude told me the two versions numbered their lineages differently, so the GIF colours wouldn't
@@ -261,6 +266,9 @@ background.
   (chapter 7) came later, when building the side-by-side comparison.
 
 ## Notes for an LLM-benchmark discussion
+
+Four later sessions (two reproductions, two blind runs) are compared with this one in
+[Five ilastik sessions compared](docs/session_comparison.md).
 
 This session is one example of an LLM agent doing a bioimage analysis task end to end. Observations from
 it, for judging such output as an analyst would:

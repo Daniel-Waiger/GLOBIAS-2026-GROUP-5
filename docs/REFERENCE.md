@@ -68,7 +68,10 @@ From `results/version_comparison.txt` (cell = probability of the nucleus channel
 Between the two versions: cell IoU 99.9993%; 161 of 3,605,410 labelled pixels have a different
 Tracking-Result value (0.0045%; median 1 px per frame, max 62 in frame 44). 137 of these lie in objects
 that ilastik's merger resolution split into two cells, 24 are cell/background edge pixels. Lineage
-numbers are the same in both runs.
+numbers were the same in both runs. Two later reruns showed that 1.3.3post3 tracking is not exactly
+repeatable (merged objects split differently; in one rerun lineages 117 and 118 swapped numbers), so
+this comparison mixes version differences with run-to-run variation; see
+[session_comparison.md](session_comparison.md).
 
 ## Changes needed to run the 2014 projects
 
