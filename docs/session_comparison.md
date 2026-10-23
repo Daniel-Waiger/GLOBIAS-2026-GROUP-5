@@ -160,6 +160,72 @@ Panel: `docs/session_comparison/annotation_panel.py` (fixed random seed, so the 
 
 ---
 
+## How the annotators "annotated"
+
+The consensus question is about combining **independent annotations**. Only one real annotation exists in
+this dataset, so it matters how the other "annotators" were made. This is read from the scripts the two
+blind sessions wrote (recovered from their transcripts).
+
+### The one real annotator: a person with ilastik's brush (2014)
+
+![The 2014 brush strokes](session_comparison/img/brush_labels_2014.png)
+
+Someone painted strokes in ilastik's graphical interface: **5,157 pixels** in total, almost all on frame 0
+(4,513 background, 482 nucleus), plus 52 background pixels on frame 22 and 110 nucleus pixels on frame 39.
+ilastik's random forest learned from these pixels, using six filter types at two scales (σ = 1.6 and
+3.5), and then labelled every pixel of all 53 frames. Two details show intent that no simulated annotator
+has: nucleus strokes are thin lines drawn just inside the nucleus edge, including on a dim nucleus
+(zoom 2), and a background stroke is painted **into the gap between two touching nuclei** (zoom 3), which
+teaches the classifier to keep them apart.
+
+### Session 3 (Sonnet): the same annotator, sampled five times
+
+No new labels were drawn. Each of its five "annotators" is a **scikit-learn random forest** (100 trees,
+random seeds 0–4) trained on a random 16 of the 27 stored 2014 label blocks, using re-implemented
+ilastik-like features (Gaussian, Laplacian of Gaussian, gradient magnitude, difference of Gaussians,
+structure-tensor and Hessian eigenvalues, at σ 1.6 and 3.5). The annotators differ only in **which of the
+2014 strokes they saw**. They are one person's labels, resampled, not five people.
+
+### Session 4 (Opus): brush strokes written by a program
+
+Session 4 kept the 2014 labels as annotator **A0** and wrote a program that **paints synthetic brush
+strokes** for five more:
+
+1. find candidate nuclei with a smoothed image and a triangle threshold (objects over 30 px);
+2. on the chosen frames, pick some candidates at random and draw a **3-pixel-wide straight stroke**
+   between two random points inside each one (2 px in from its edge);
+3. apply the annotator's boundary habit: a tight edge (part of the outer pixel ring painted as
+   background) or a generous 2-pixel halo painted as nucleus;
+4. for the "bright only" annotators, paint nuclei in the dimmest third as **background**;
+5. add a few background strokes in random places at least 10 px away from any candidate.
+
+| annotator | frames painted | nuclei painted per frame | boundary habit | dim nuclei | background strokes |
+|---|---|---|---|---|---|
+| A0 (2014 person) | 0, 22, 39 | — | as drawn | labelled | as drawn |
+| A1 tight | 0, 26 | 12 | tight (−1 px) | labelled | 6 |
+| A2 generous | 0, 26 | 12 | halo (+2 px) | labelled | 6 |
+| A3 bright only | 0, 26 | 15 | — | **background** | 6 |
+| A4 sparse | 10 | 3 | — | labelled | 3 |
+| A5 late frames | 45, 52 | 12 | — | labelled | 6 |
+| A3b, A3c (biased pool) | 5 + 30, 15 + 40 | 15 | — | **background** | 6 |
+
+Each label set was then loaded into its **own copy of the 2014 ilastik project** (same features, trained
+forest removed) and retrained headless in ilastik 1.4.2; a pixel counts as nucleus where the probability
+is above 0.5, after filling holes and removing objects of 20 px or less.
+
+### What this means for the consensus question
+
+- None of the annotators is an independent person. Session 3's differ only by sampling; Session 4's differ
+  by rules the model wrote, and their strokes are placed with a threshold, so their classifiers partly
+  learn that threshold back.
+- The real annotator painted with intent (separating touching nuclei, labelling a dim nucleus). The
+  simulated ones paint straight lines at random positions. A consensus of such annotators can test the
+  **rules**, but says little about how real people disagree.
+- Session 4's biased pool is the clearest illustration: three "bright only" annotators outvote the real
+  one, and the agreement scores then rank the real annotator worst.
+
+---
+
 ## The blind runs: two answers to the consensus question
 
 The group question is *"Can consensus become ground truth?"*. The MitoCheck example has only **one** set
