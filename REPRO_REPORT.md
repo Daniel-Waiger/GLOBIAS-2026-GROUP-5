@@ -1,5 +1,9 @@
 # Reproducibility report: ilastik MitoCheck workflow
 
+**Model: `claude-opus-5-5` (Claude Opus 5.5) · Effort: `high`**. Both values come from the session
+API (`configured_model`, `session_context.model` and `last_served_model`, plus `effort_level`). They
+were checked at 09:17 and again at 09:34 UTC and did not change during the session.
+
 Branch `repro/opus-5.5-high`, run on 2026-10-23 in a Claude Code cloud session.
 
 ## Agent
