@@ -163,3 +163,52 @@ text is the regenerated one, so it passes as long as the Python helpers give the
   1.3.3post3 tracking outputs, CSVs, 1.3.3post3 previews, the side-by-side GIF,
   `version_comparison.txt`, and the ilastik logs (timestamps). Everything else in `results/` came out
   byte-identical to `main`.
+
+## Findings and open questions (end of session)
+
+### Findings
+
+1. **The scripted pipeline reproduces without human help.** A fresh container with open network ran
+   `scripts/run_all.sh` unchanged to exit 0 in 31 min. None of the walls in the README came back,
+   because the fixes are in the scripts.
+2. **Pixel classification is exactly reproducible** in both versions: the probability maps are
+   byte-identical to `main`.
+3. **ilastik 1.5.0a3 tracking was exactly reproducible** in this one rerun: every label pixel matched.
+4. **ilastik 1.3.3post3 tracking was not exactly reproducible.** The counts and cell masks matched, but:
+   - two lineages swapped ID numbers (117 and 118);
+   - touching cells that ilastik splits apart (merged objects) were split differently. Every differing
+     Object-Identities pixel lies inside a merged object.
+5. **The committed version-to-version difference (161 px) is about the same size as 1.3.3post3's
+   run-to-run variation.** This rerun's cross-version difference is 69 px once the 117/118 swap is
+   undone. [Inference] Most of the "161 px differ between versions" reported in the README is probably
+   run-to-run noise in how merged objects are split, not a real difference between versions.
+6. **The README claim "Lineage numbers are the same in both runs" is not robust.** It held in the
+   committed run and failed here.
+7. **The CSV column order changes between runs** in both versions (values unchanged). Anything that
+   compares CSVs by column position, or byte by byte, will report false differences.
+8. **The CI `full_pipeline` job would fail on this rerun**: it runs `git diff --exit-code` on
+   `results/version_comparison.txt`, and that file changed. Its `summary.txt` check would pass.
+9. **About 60% of the run time is lossless compression for git** (~19 of 31 min). ilastik itself took
+   ~7.5 min.
+
+### Open questions
+
+1. **Is ilastik 1.3.3post3's merger resolution random?** For example, an unseeded random start when it
+   fits the cells inside a blob. Could it be fixed with a seed or environment variable? Not checked in
+   the source.
+2. **Does thread count matter?** Would `LAZYFLOW_THREADS=1` make 1.3.3post3 deterministic? (This run
+   used 4.)
+3. **How variable is each version?** One rerun per version is not enough. Suggested: 5–10 reruns per
+   version, then count how often IDs swap and how many merged-object pixels change.
+4. **Was 1.5.0a3's identical result luck, or is that version deterministic?** Same test as question 3.
+5. **Should the comparison ignore ID numbers?** For example, match lineages by overlap before counting
+   differing pixels, so that a swap like 117/118 is not reported as 57,000 differing pixels.
+6. **Should CI compare CSVs by column name** and treat merged objects separately, so that a rerun is
+   judged on what matters (counts, masks, track structure)?
+7. **What counts as "success" when comparing agents?** Counts and masks identical (this run passes)
+   or every label pixel identical (this run fails for 1.3.3post3)? The answer changes how this run
+   should be scored.
+8. **Are the tracks right?** Still no comparison against ground truth: `manualTracking.ilp` in the zip
+   has not been opened. [Unverified] It may contain hand-made tracks usable as a reference.
+9. Still open from the README and not addressed here: whether `max_nearest_neighbors = 3` matches the
+   2014 behaviour; ilastik 1.3.1 itself; whether supplying `__atan2_finite` would let 1.3.2post1 run.
