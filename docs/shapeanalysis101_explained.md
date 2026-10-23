@@ -28,7 +28,7 @@ average and classify those outlines. Two biological datasets are used:
 | Dataset | What it shows | Question asked |
 |---|---|---|
 | **C. elegans** (roundworms), from the Broad BBBC010 collection | Brightfield images of worms in a live/dead assay | How do the body shapes of live and dead worms differ? |
-| **MEF_LMNA**, mouse embryonic fibroblasts, from the kukionfr *Micropattern_MEF_LMNA_Image* repo | Fluorescence images of wild-type cells and lamin-deficient (LMNA−/−) cells | Can a cell's type be told from its outline alone? |
+| **MEF_LMNA**, mouse embryonic fibroblasts, from the kukionfr *Micropattern_MEF_LMNA_Image* repo | Fluorescence images of wild-type cells and lamin-deficient (LMNA−/−) cells | Can a cell's type be told from its outline alone? (Found later: in this dataset genotype is confounded with substrate; see the note after section 7.6.) |
 
 The four notebooks form a pipeline:
 
@@ -453,7 +453,8 @@ notebook loads the spline objects with `allow_pickle=True`. That is only safe if
 
 ## 7. Notebook 3 and `shape_embeddings/`: learned shape fingerprints
 
-**Task:** tell wild-type MEFs from lamin-deficient ones from the cell outline alone.
+**Task:** tell wild-type MEFs from lamin-deficient ones from the cell outline alone. (As assembled, this dataset
+confounds genotype with substrate; see "A confound in the MEF dataset" after section 7.6.)
 
 1. Each cell is 120 unordered (row, col) points from `mef_data.npy`.
 2. A neural network (**PointNet**) turns each cell into a list of 2048 numbers, the **embedding**, a shape
@@ -596,6 +597,41 @@ Only cells 33, 36 and 39 differ between exercise and solution.
 - So the saved outputs do not show a trained model; students are expected to raise `epochs` themselves.
 - The two runs differ because the train/validation split is unseeded.
 
+### A confound in the MEF dataset (found after this walkthrough was written)
+
+This is a property of how the dataset was assembled, not a bug in the code, and it changes how every MEF
+result above should be read.
+
+- **What was checked.** The original repository, kukionfr/Micropattern_MEF_LMNA_Image (MIT © 2020 Kyu Sang
+  Han; commit `7cbe667`), has twelve folders: three substrates (`Control` = unpatterned, `Circle`,
+  `Triangle` micropatterns) × two genotypes (`LMNA++`, `LMNA--`) × suffixes `1` and `2`, 100 fields each.
+  The tutorial's `mef_data.npy` labels its 200 fields only "wildtype" or "lmna". For 28 of those fields
+  (14 per class, spread over the field numbers) the tutorial's outlines were laid on the actin image with
+  the same field number in each of the twelve folders, and the distance from the outline points to the
+  cell edges was measured.
+- **Result.** All 14 sampled wild-type fields come from `Control/LMNA++1` (cells spreading on an
+  unpatterned surface) and all 14 sampled LMNA−/− fields from `Circle/LMNA--1` (cells confined to a circle
+  micropattern). In every one of the 28, the matching folder sits 1.0 to 6.8 px from the edges and every
+  other folder 29.9 px or more; the edges come from an Otsu mask of the smoothed actin image with
+  intensities clipped at the 99.5th percentile, and without that clip one field (wild-type xy054) fails
+  because of a saturated spot. A second measure, the actin intensity inside versus outside the outlines,
+  agrees (1.3 to 6.8 in the matching folder, 0.9 to 1.1 elsewhere). [Inference] The other 172 fields come
+  from the same two folders.
+- **What it means.** In this dataset genotype is confounded with substrate, and with whatever else differs
+  between the two folders (culture dish, day, imaging session; the repository does not say what the
+  suffixes 1 and 2 mean). Two hand-made roundness numbers (circularity and the long-to-short axis ratio of
+  the outline) classify the cells at 0.94 in 5-fold cross-validation, level with a trained PointNet. So
+  the tutorial's MEF accuracies, including the 0.835 untrained baseline above, cannot be attributed to the
+  loss of lamin A/C. [Inference] The classifier most likely sees "round, as a circle pattern would make it"
+  versus "freely spread".
+- **What would fix it.** The original repository has both genotypes on every substrate, so a fair
+  comparison (for example `Control/LMNA++` against `Control/LMNA--`) is possible; it needs new
+  segmentation and has not been done.
+- **Where the details are.** The field-by-field evidence, the method and the roundness baseline are in the
+  field guide's `ATTRIBUTION.md` and chapter 10, and on the lab's MEF page:
+  <https://daniel-waiger.github.io/shape-analysis-field-guide/lab/#/mef>. The confound was found by
+  looking at the raw images while building the lab's "From pixels" panel.
+
 **Problems found, in order of impact:**
 
 1. **`Center` averages over the wrong axis.** Confirmed by reading the data and the code together.
@@ -646,6 +682,7 @@ Only cells 33, 36 and 39 differ between exercise and solution.
 | 14 | Notebooks 1/2A | `skeletonize_3d`, `np.complex`, `np.Inf` break on current scikit-image / NumPy | **Yes**, on a modern install |
 | 15 | `spline_models.npy`, `mef_data.npy` | Pickle files; `spline_models.npy` runs repo code when loaded | Security note |
 | 16 | `spline_models/.DS_Store` | Accidentally committed macOS file | No |
+| 17 | MEF data assembly (not code) | Genotype confounded with substrate: sampled wild-type fields from the unpatterned folder, LMNA−/− from the circle-micropattern folder (see the note after section 7.6) | **Yes**: no MEF accuracy can be read as genotype |
 
 ---
 

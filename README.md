@@ -304,7 +304,8 @@ so that populations can be averaged, compared and classified.
   Virginie Uhlmann (2021).
 - **[Phenotype Lab](https://daniel-waiger.github.io/shape-analysis-field-guide/lab/)**, the guide's
   chapter 10: whether shape alone can classify a phenotype, on six labeled datasets (live vs dead worms,
-  wild-type vs lamin-deficient fibroblasts, schizophrenia vs control brain landmarks, female vs male
+  wild-type vs lamin-deficient fibroblasts, a comparison the lab shows is confounded with the cells'
+  growth substrate, schizophrenia vs control brain landmarks, female vs male
   gorilla skulls, 15 leaf species, sickle-cell erythrocytes), with landmark, spline and PointNet methods
   side by side against a size-only baseline. Every number comes from a script in the guide's repository;
   you can drag a shape and watch the classifier respond, in the browser or on a phone. The
