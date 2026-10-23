@@ -139,6 +139,27 @@ For reference, Session 0's comparison of the two versions, frame by frame:
 
 ---
 
+## Session 0's segmentation vs the 2014 original
+
+The 2014 tracking project stores the object segmentation ilastik made in 2014, for all 53 frames. This
+panel compares it with Session 0's final run (ilastik 1.3.3post3), in 36 random frames:
+
+![2014 original segmentation vs Session 0's rerun, 36 random tiles](session_comparison/img/annotations_vs_2014.png)
+
+- **White** outlines are drawn by both, **blue** only by the 2014 original, **orange** only by Session 0.
+- Over the whole movie the cell masks overlap by **99.69%** (IoU). Objects per frame: 79–228 in 2014,
+  80–232 in Session 0; the counts differ in 46 of 53 frames, by at most 5.
+- 99.9% of the 2014 objects have a Session 0 object that overlaps it by more than half.
+- The one visible difference in the panel is frame 50, where Session 0 splits two touching nuclei and
+  2014 does not. [Inference] The stored 2014 label image is probably taken *before* ilastik's merger
+  resolution splits such blobs, so tiles like this one are not a strict like-for-like comparison.
+- This is a comparison with ilastik's own 2014 output, **not with human annotations**.
+  `manualTracking.ilp` holds hand-made track labels for some objects; they have not been compared yet.
+
+Panel: `docs/session_comparison/annotation_panel.py` (fixed random seed, so the same 36 tiles every time).
+
+---
+
 ## The blind runs: two answers to the consensus question
 
 The group question is *"Can consensus become ground truth?"*. The MitoCheck example has only **one** set
