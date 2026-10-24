@@ -1,4 +1,4 @@
-# GLOBIAS 2026 · Group 5 · Assignments I & II
+# ilastik MitoCheck run · GloBIAS 2026 · Group 5
 
 **Twelve years later: re-running ilastik's MitoCheck tracking example**
 
@@ -28,11 +28,10 @@ are in [docs/REFERENCE.md](docs/REFERENCE.md). This page tells the story.
 
 ## Group discussion
 
-Discussion for Group 5 and the workshop happens in the
-[issue tracker](https://github.com/Daniel-Waiger/GLOBIAS-2026-GROUP-5/issues). Start with the issue labelled
-`start-here`. **New issue** offers forms for a discussion topic, an Assignment I LLM-benchmark entry
-(one per LLM answer), an Assignment II consensus experiment (one per dataset and combination rule),
-meeting notes, and problems with the pipeline.
+Discussion for Group 5 and the workshop (Assignments I and II, the presentation) happens in the
+[workshop repository](https://github.com/globias-2026-group5/workshop/issues). Start with the issue
+labelled `start-here`. Problems with this repository's scripts or results go in this repository's
+[issues](https://github.com/globias-2026-group5/ilastik-mitocheck-run/issues).
 
 
 
@@ -250,11 +249,6 @@ cells. The two versions draw the dividing line a little differently. 137 of the 
 are cases like this; the other 24 are edge pixels that one version calls cell and the other
 background.
 
-> **Update, 23 October.** Two later reproduction runs found that ilastik 1.3.3post3's tracking is not
-> exactly repeatable: on rerun, touching nuclei were split differently, and in one run two lineages
-> swapped numbers. Much of the 161-pixel difference above is probably run-to-run variation, not a
-> difference between versions. See [Five ilastik sessions compared](docs/session_comparison.md).
-
 ## Two things Claude got wrong on the way
 
 - Claude told me the two versions numbered their lineages differently, so the GIF colours wouldn't
@@ -266,9 +260,6 @@ background.
   (chapter 7) came later, when building the side-by-side comparison.
 
 ## Notes for an LLM-benchmark discussion
-
-Four later sessions (two reproductions, two blind runs) are compared with this one in
-[Five ilastik sessions compared](docs/session_comparison.md).
 
 This session is one example of an LLM agent doing a bioimage analysis task end to end. Observations from
 it, for judging such output as an analyst would:
@@ -307,21 +298,21 @@ The second strand of this group's work is shape analysis, the step after segment
 turning each outline into numbers that ignore where a cell sits, how big it is and which way it points,
 so that populations can be averaged, compared and classified.
 
-- **[Daniel-Waiger/shape-analysis-field-guide](https://github.com/Daniel-Waiger/shape-analysis-field-guide)**
+- **[globias-2026-group5/shape-analysis-field-guide](https://github.com/globias-2026-group5/shape-analysis-field-guide)**
   — a plain-language, illustrated guide in eleven chapters, with a tested Python
   re-implementation of every method (`shapekit`), 27 generated figures and animations, and a reader site
   with six interactive demos, published at
-  **<https://daniel-waiger.github.io/shape-analysis-field-guide/>**. It adapts the EMBL-EBI tutorial
+  **<https://globias-2026-group5.github.io/shape-analysis-field-guide/>**. It adapts the EMBL-EBI tutorial
   [Shape Analysis 101](https://github.com/uhlmanngroup/shapeanalysis101) by Johannes Hugger and
   Virginie Uhlmann (2021).
-- **[Phenotype Lab](https://daniel-waiger.github.io/shape-analysis-field-guide/lab/)**, the guide's
+- **[Phenotype Lab](https://globias-2026-group5.github.io/shape-analysis-field-guide/lab/)**, the guide's
   chapter 10: whether shape alone can classify a phenotype, on six labeled datasets (live vs dead worms,
   wild-type vs lamin-deficient fibroblasts, a comparison the lab shows is confounded with the cells'
   growth substrate, schizophrenia vs control brain landmarks, female vs male
   gorilla skulls, 15 leaf species, sickle-cell erythrocytes), with landmark, spline and PointNet methods
   side by side against a size-only baseline. Every number comes from a script in the guide's repository;
   you can drag a shape and watch the classifier respond, in the browser or on a phone. The
-  [chapter text](https://daniel-waiger.github.io/shape-analysis-field-guide/#10) reports the results
+  [chapter text](https://globias-2026-group5.github.io/shape-analysis-field-guide/#10) reports the results
   as they came out, including one below chance.
 - **[docs/shapeanalysis101_explained.md](docs/shapeanalysis101_explained.md)**, in this repository: the
   file-by-file reading of that tutorial that the guide was built from, including the bugs found in it

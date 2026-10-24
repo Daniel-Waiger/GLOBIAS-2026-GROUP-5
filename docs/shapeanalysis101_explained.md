@@ -629,7 +629,7 @@ result above should be read.
   segmentation and has not been done.
 - **Where the details are.** The field-by-field evidence, the method and the roundness baseline are in the
   field guide's `ATTRIBUTION.md` and chapter 10, and on the lab's MEF page:
-  <https://daniel-waiger.github.io/shape-analysis-field-guide/lab/#/mef>. The confound was found by
+  <https://globias-2026-group5.github.io/shape-analysis-field-guide/lab/#/mef>. The confound was found by
   looking at the raw images while building the lab's "From pixels" panel.
 
 **Problems found, in order of impact:**
