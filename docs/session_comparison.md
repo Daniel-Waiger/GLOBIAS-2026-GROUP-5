@@ -34,6 +34,9 @@ repository's instructions.
   used scikit-learn instead.
 - **Both blind sessions reached the same answer:** consensus is not sufficient to define ground truth.
 - **Every session overstated something** that a second look caught.
+- **Against the only hand-made tracks, Session 0's tracking is close:** it makes 401 of 404 steps and 5 of
+  7 divisions, in both ilastik versions. Of the four disagreements, three are ilastik's errors and one is a
+  division that both ilastik and the person missed.
 
 ---
 
@@ -153,17 +156,81 @@ panel compares it with Session 0's final run (ilastik 1.3.3post3), in 36 random 
 - The one visible difference in the panel is frame 50, where Session 0 splits two touching nuclei and
   2014 does not. [Inference] The stored 2014 label image is probably taken *before* ilastik's merger
   resolution splits such blobs, so tiles like this one are not a strict like-for-like comparison.
-- This is a comparison with ilastik's own 2014 output, **not with human annotations**.
-  `manualTracking.ilp` holds hand-made track labels for some objects; they have not been compared yet.
+- This is a comparison with ilastik's own 2014 output, **not with human annotations**. The hand-made
+  tracks are compared in the next section.
 
 Panel: `docs/session_comparison/annotation_panel.py` (fixed random seed, so the same 36 tiles every time).
 
 ---
 
+## Session 0's tracking vs the 2014 hand-made tracks
+
+`manualTracking.ilp` holds the only human **tracking** in the dataset. On 11 February 2014 someone used
+ilastik's Manual Tracking workflow to follow **6 cells and their descendants through all 53 frames**: 404
+objects, 20 track labels and 7 divisions. They also marked 21 objects as two touching cells, and one as a
+false detection. Most cells were not tracked by hand: the movie has about 80–230 objects per frame.
+
+Both of Session 0's runs (ilastik 1.3.3post3 and 1.5.0a3) give **exactly the same result** against these
+tracks:
+
+![The hand-made tracks, coloured by whether the automatic tracking made the same step](session_comparison/img/manual_tracks.png)
+
+| | the person drew | ilastik made the same |
+|---|---|---|
+| steps of one cell from a frame to the next | 404 | 401 (99.3%) |
+| divisions | 7 | 5 |
+| objects marked as two touching cells | 21 | all 21 split into two cells |
+| object marked as a false detection | 1 | left untracked (agrees) |
+| starting cells followed by one ilastik lineage throughout | 6 | 3 |
+
+The steps ilastik did not make come from four places:
+
+![The four disagreements: the person's tracks on the left, ilastik's on the right](session_comparison/img/manual_tracks_cases.png)
+
+1. **Cell 12, frames 0–26: ilastik's error.** ilastik treats one large nucleus as two touching nuclei for
+   26 frames (tracks 117 and 118). When the cell divides, ilastik follows the two daughters as the two
+   "cells" it already had, so it records no division. These are the lineages 117 and 118 whose numbers
+   swapped on Session 1's rerun (see above). [Inference] ilastik cuts one nucleus into two similar halves,
+   so which half gets which number can change from run to run.
+2. **Cell 17, frame 10→11: ilastik's error.** Both see the division, but ilastik takes the wrong second
+   daughter: a daughter of the neighbouring cell, which divides in the same frame. The real sister starts
+   as a new cell.
+3. **Cell 16, frame 20→21: a division both missed.** The cell divides into two small bright daughters.
+   The person continues 16 into one daughter and never tracks the other. ilastik continues it into the
+   other daughter, and hands the first to a neighbour's track, which leaves that neighbour untracked in
+   frames 21 and 22.
+4. **Cell 21, frame 51: ilastik's error.** Its track jumps to another cell for one frame and back, so
+   cell 21 is untracked in frame 51.
+
+[Inference] Who is right in cases 2 and 3 is read from the images (position, brightness and size of the
+nuclei), not from a second annotator.
+
+What this adds:
+
+- **On the cells the person tracked, the automatic tracking is close:** 6 of the 418 hand-drawn steps
+  differ. The errors are typical tracking errors: one nucleus taken for two, a daughter given to the
+  wrong mother, and a one-frame jump.
+- **The hand-made tracks have an error too** (case 3). One person's sparse annotation can check the
+  automatic tracks, but it is not a complete ground truth. This is the consensus question again.
+- **The check is narrow:** 6 cells out of about 100–230 per frame, chosen by the person, not at random.
+- **The run-to-run variation of ilastik 1.3.3post3** (see above) does not touch the tracked cells.
+
+How it was compared: each hand-made object is matched to the ilastik objects whose centre, from ilastik's
+CSV table, lies inside it (grown by 3 px). A step counts as made if ilastik joins the matched objects the
+same way: the same track, or mother to daughter. The matching uses the table's centres rather than
+ilastik's object image. In the 1.3.3post3 run, the image and the table give a different id to 81 of the 166
+objects made by splitting touching nuclei (1.5.0a3: none). Joining the two by id would have counted 12
+steps as missed that ilastik did make.
+
+Script: `docs/session_comparison/manual_tracking.py` (prints the full report and draws both figures).
+
+---
+
 ## How the annotators "annotated"
 
-The consensus question is about combining **independent annotations**. Only one real annotation exists in
-this dataset, so it matters how the other "annotators" were made. This is read from the scripts the two
+The consensus question is about combining **independent annotations**. Only one real segmentation
+annotation exists in this dataset (the hand-made tracks above are a different task), so it matters how the
+other "annotators" were made. This is read from the scripts the two
 blind sessions wrote (recovered from their transcripts).
 
 ### The one real annotator: a person with ilastik's brush (2014)
@@ -229,7 +296,7 @@ is above 0.5, after filling holes and removing objects of 20 px or less.
 ## The blind runs: two answers to the consensus question
 
 The group question is *"Can consensus become ground truth?"*. The MitoCheck example has only **one** set
-of human labels (the 27 label blocks drawn in 2014), so both blind sessions simulated more annotators
+of human segmentation labels (the 27 label blocks drawn in 2014), so both blind sessions simulated more annotators
 from it and then combined them.
 
 ![Session 4 nuclei per frame by rule; Session 3 disagreement per frame](session_comparison/img/blind_results.png)
@@ -355,6 +422,9 @@ question is really about.
    by a second look: a rerun, a pixel-level comparison, or reading the transcript.
 6. **Access needs a rule.** Both reproductions widened their own repository access to finish. Nothing went
    wrong, but neither had been told whether they may.
+7. **Against human tracks, the pipeline is close but not perfect, and so is the human.** On the 6 cells
+   tracked by hand in 2014, ilastik misses 2 of 7 divisions and 3 of 404 steps. The person also missed a
+   division.
 
 ## Lessons for future cases
 
@@ -397,6 +467,8 @@ question is really about.
   rounded to the nearest few seconds from tool output.
 - **Figures:** `docs/session_comparison/make_figures.py`. All hand-copied numbers sit in one block at
   the top of the script, with their source.
+- **Hand-made tracks:** `docs/session_comparison/manual_tracking.py`, computed from
+  `data/mitocheck_2d+t/manualTracking.ilp` and Session 0's committed tracking results.
 
 How the comparison numbers work, in plain terms:
 
