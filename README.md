@@ -97,7 +97,7 @@ probability map exported from the pixel classifier in 2013.
 
 > **Before you scroll:** you're short on disk space. Which file in the zip looks safest to delete?
 >
-> <details><summary>Answer</summary>
+> <details markdown="1"><summary>Answer</summary>
 >
 > `…_export.h5` looks like a disposable intermediate: step 2 regenerates it. But the tracking project
 > refuses to open without it (chapter 5). Its object-count and division classifiers were trained on
@@ -118,7 +118,7 @@ The second wall was more interesting:
 > **Puzzle:** the movie is 1344 × 1024 pixels. ilastik complains that a stored label block covering
 > 1024–1088 on axis 1 doesn't intersect the image. Is the 2014 project corrupt?
 >
-> <details><summary>Answer</summary>
+> <details markdown="1"><summary>Answer</summary>
 >
 > No. Axis 1 has 1344 pixels in the file on disk (order `t, x, y, c`), so 1024–1088 is well inside.
 > ilastik 1.5 works internally in `t, y, x, c` order, where axis 1 is y and only 1024 pixels long.
@@ -172,7 +172,7 @@ There is no 1.3.1 release in ilastik's archive, only a beta. The closest release
 
 > **Look at the first warning.** Is this crash about the MitoCheck project?
 >
-> <details><summary>Answer</summary>
+> <details markdown="1"><summary>Answer</summary>
 >
 > Mostly not. The crashing line only runs when ilastik's bundled "fast filters" library fails to import
 > and ilastik falls back to vigra's filters. Here it fails because the 2018 binary needs a C-library
@@ -214,7 +214,7 @@ files losslessly so they fit on GitHub.
 
 > **Trap:** both versions agree with the 2014 probability map on **99.989%** of pixels. Impressive?
 >
-> <details><summary>Answer</summary>
+> <details markdown="1"><summary>Answer</summary>
 >
 > Less than it sounds. Nuclei cover 5% of each frame, so a map that called *everything* background
 > would still agree on about 95% of pixels. The fairer number is the IoU on the cells themselves
@@ -225,7 +225,7 @@ files losslessly so they fit on GitHub.
 > **Trap:** count the distinct non-zero values in the Tracking-Result image and you get 118. How many
 > lineages are there?
 >
-> <details><summary>Answer</summary>
+> <details markdown="1"><summary>Answer</summary>
 >
 > 117. Value **1** is not a cell: it marks every object that was detected but not linked into any
 > track (`trackId = -1` in the CSV table). Real lineages are values 2–118.
